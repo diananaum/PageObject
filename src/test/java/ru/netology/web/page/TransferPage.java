@@ -19,15 +19,22 @@ public class TransferPage {
         heading.shouldBe(Condition.visible);
     }
 
-    public void makeTransfer(String amount, DataHelper.CardInfo cardInfo) {
+    public TransferPage makeTransfer(String amount, DataHelper.CardInfo cardInfo) {
         amountInput.setValue(amount);
         fromInput.setValue(cardInfo.getCardNumber());
+        return this;
     }
 
     public DashboardPage validTransfer(String amount, DataHelper.CardInfo cardInfo) {
         makeTransfer(amount, cardInfo);
         transferButton.click();
         return new DashboardPage();
+    }
+
+    public TransferPage invalidTransfer(String amount, DataHelper.CardInfo cardInfo) {
+        makeTransfer(amount, cardInfo);
+        transferButton.click();
+        return this;
     }
 
     public DashboardPage cancelTransfer() {
